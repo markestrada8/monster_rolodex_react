@@ -5,6 +5,7 @@ import SearchBox from "./components/search-box/search-box.component";
 import "./App.css";
 
 const App = () => {
+  const [title, setTitle] = useState("");
   const [searchParameter, setSearchParameter] = useState("");
   const [displayMonsters, setDisplayMonsters] = useState([]);
   const [monsters, setMonsters] = useState([]);
@@ -18,6 +19,10 @@ const App = () => {
           .includes(event.target.value.toLowerCase());
       })
     );
+  };
+
+  const onTitleChange = (event) => {
+    setTitle(event.target.value);
   };
 
   useEffect(() => {
@@ -40,6 +45,16 @@ const App = () => {
         onChangeHandler={onSearchChange}
         placeholder={"Search Monsters"}
       />
+
+      <br />
+
+      <SearchBox
+        className={"monster-search-box"}
+        searchParameter={title}
+        onChangeHandler={onTitleChange}
+        placeholder={"title"}
+      />
+      <h1>{title}</h1>
 
       <CardList displayMonsters={displayMonsters} />
     </div>
